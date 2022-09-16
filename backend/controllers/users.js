@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 
 // const SALT_ROUNDS = 10;
 // const JWT_SECRET = 'verysecretjwtkey';
-const { JWT_SECRET, SALT_ROUNDS = 10 } = process.env;
+const { NODE_ENV, JWT_SECRET, SALT_ROUNDS = 10 } = process.env;
 const User = require('../models/user');
 const { NotFoundError } = require('../errors/NotFoundError');
 const { BadRequestError } = require('../errors/BadRequestError');
@@ -35,7 +35,7 @@ const loginUser = (req, res, next) => {
   const { email, password } = req.body;
   User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, JWT_SECRET, { expiresIn: '7d' });
+      const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'verysecretjwtkey', { expiresIn: '7d' });
       res
       /* .cookie('jwt', token, {
           maxAge: 3600000 * 24 * 7,
