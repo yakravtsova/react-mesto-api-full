@@ -1,0 +1,14 @@
+.header__menu {
+  display: none;
+  align-self: center;
+}
+
+@media all and (max-width: 640px) {
+  .header__menu {
+    justify-content: center;
+    width: 100%;
+    padding: 40px 0;
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(84, 84, 84, .7);
+  }
+}

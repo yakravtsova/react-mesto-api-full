@@ -1,0 +1,13 @@
+.header__wrap {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 119px;
+}
+
+@media all and (max-width: 768px) {
+  .header__wrap {
+    min-height: 84px;
+  }
+}

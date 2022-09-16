@@ -1,0 +1,23 @@
+.header__link {
+  padding: 0;
+  color: #fff;
+  font-size: 18px;
+  line-height: 22px;
+  background-color: #000;
+  border: none;
+  cursor: pointer;
+  display: none;
+}
+
+@media all and (max-width: 924px) {
+  .header__link {
+    margin-right: 27px;
+  }
+}
+
+@media all and (max-width: 640px) {
+  .header__link {
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

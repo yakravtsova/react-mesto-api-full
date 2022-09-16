@@ -1,0 +1,9 @@
+.login__form {
+  width: 385px;
+}
+
+@media all and (max-width: 640px) {
+  .login__form {
+    width: 260px;
+  }
+}

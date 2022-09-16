@@ -1,0 +1,10 @@
+.header__menu-button {
+  display: none;
+  padding: 0;
+    margin-right: 27px;
+    width: 24px;
+    height: 24px;
+    background-color: #000;
+    border: none;
+    cursor: pointer;
+}

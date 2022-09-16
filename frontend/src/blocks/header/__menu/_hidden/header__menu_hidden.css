@@ -1,0 +1,9 @@
+.header__menu_hidden {
+  display: block;
+}
+
+@media all and (max-width: 640px) {
+  .header__menu_hidden {
+    display: none;
+  }
+}

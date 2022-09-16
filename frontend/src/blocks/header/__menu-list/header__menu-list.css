@@ -1,0 +1,21 @@
+.header__menu-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+}
+
+@media all and (max-width: 924px) {
+  .header__menu-list {
+    margin-right: 27px;
+  }
+}
+
+@media all and (max-width: 640px) {
+  .header__menu-list {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+}
