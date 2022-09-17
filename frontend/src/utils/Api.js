@@ -4,6 +4,16 @@ class Api {
     this._headers = headers;
   }
 
+  _getAuthHeader() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      return {
+        authorization: `Bearer ${localStorage.getItem('token')}`,
+      }
+    }
+    else return;
+  }
+
   _handleResponse(res) {
     if (res.ok) {
       return res.json();
@@ -14,7 +24,7 @@ class Api {
   getAllCards() {
     return fetch(`${this._url}cards`, {
       method: 'GET',
-      headers: this._headers
+      headers: {...this._headers, ...this._getAuthHeader()},
     })
     .then(res => this._handleResponse(res))
   }
@@ -22,7 +32,7 @@ class Api {
   addCard(data) {
     return fetch(`${this._url}cards`, {
       method: 'POST',
-      headers: this._headers,
+      headers: {...this._headers, ...this._getAuthHeader()},
       body: JSON.stringify(data)
     })
     .then(res => this._handleResponse(res))
@@ -31,7 +41,7 @@ class Api {
   deleteCard(cardId) {
     return fetch(`${this._url}cards/${cardId}`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: {...this._headers, ...this._getAuthHeader()},
     })
     .then(res => this._handleResponse(res))
   }
@@ -39,7 +49,7 @@ class Api {
   likeCard(cardId) {
     return fetch(`${this._url}cards/${cardId}/likes`, {
       method: 'PUT',
-      headers: this._headers,
+      headers: {...this._headers, ...this._getAuthHeader()},
     })
     .then(res => this._handleResponse(res))
   }
@@ -47,7 +57,7 @@ class Api {
   deleteLikeCard(cardId) {
     return fetch(`${this._url}cards/${cardId}/likes`, {
       method: 'DELETE',
-      headers: this._headers,
+      headers: {...this._headers, ...this._getAuthHeader()},
     })
     .then(res => this._handleResponse(res))
   }
@@ -55,7 +65,7 @@ class Api {
   changeLikeCardStatus(cardId, likedInverted) {
     return fetch(`${this._url}cards/${cardId}/likes`, {
       method: `${likedInverted ? 'PUT' : 'DELETE'}`,
-      headers: this._headers,
+      headers: {...this._headers, ...this._getAuthHeader()},
     })
     .then(res => this._handleResponse(res))
   }
@@ -63,7 +73,7 @@ class Api {
   getUserData() {
     return fetch(`${this._url}users/me`, {
       method: 'GET',
-      headers: this._headers
+      headers: {...this._headers, ...this._getAuthHeader()},
     })
     .then(res => this._handleResponse(res))
   }
@@ -75,7 +85,7 @@ class Api {
   editUserData(data) {
     return fetch(`${this._url}users/me`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {...this._headers, ...this._getAuthHeader()},
       body: JSON.stringify(data)
     })
     .then(res => this._handleResponse(res))
@@ -84,7 +94,7 @@ class Api {
   editAvatar(avatar) {
     return fetch(`${this._url}users/me/avatar`, {
       method: 'PATCH',
-      headers: this._headers,
+      headers: {...this._headers, ...this._getAuthHeader()},
       body: JSON.stringify(avatar)
     })
     .then(res => this._handleResponse(res))
@@ -92,9 +102,8 @@ class Api {
 }
 
 const api = new Api(
-  'http://api.yakravtsova.students.nomoredomains.sbs/',
+  'https://api.yakravtsova.students.nomoredomains.sbs/',
   {
-    authorization: `Bearer ${localStorage.getItem('token')}`,
     'Content-Type': 'application/json'
   }
 );

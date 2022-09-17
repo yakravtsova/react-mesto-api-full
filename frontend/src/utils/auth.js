@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://api.yakravtsova.students.nomoredomains.sbs';
+export const BASE_URL = 'https://api.yakravtsova.students.nomoredomains.sbs';
 
 function handleResponse(res) {
   if (res.ok) {

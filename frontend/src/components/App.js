@@ -30,6 +30,7 @@ function App() {
   const [IsOk, setIsOk] = useState(false);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     tokenCheck();
   }, []);
@@ -39,6 +40,7 @@ function App() {
       api.getAllData()
       .then(allData => {
         const [userData, allCardsData] = allData;
+        console.log(userData);
         setCards(allCardsData);
         setCurrentUser(userData)
       })
@@ -85,6 +87,15 @@ function App() {
       if (data.token) {
         handleLogin();
         tokenCheck();
+        api.getAllData()
+          .then(allData => {
+            const [userData, allCardsData] = allData;
+            console.log(userData);
+            setCards(allCardsData);
+            setCurrentUser(userData)
+          })
+          .catch(err => console.log(err));
+    
       }
       else {
         setIsOk(false);
@@ -159,6 +170,7 @@ function App() {
   }
 
   function handleCardDelete(card) {
+    console.log(card.owner, ' / ', currentUser._id);
     api.deleteCard(card._id)
     .then(message => {
       setCards((state) => state.filter((c) => c._id !== card._id))
